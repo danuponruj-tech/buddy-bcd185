@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from ‘react’;
-import { Heart, Send, Trophy, LogOut, MessageCircle, Star, Bell, Image as ImageIcon, X, Eye, EyeOff } from ‘lucide-react’;
-import { auth, db } from './firebase’;
+import React, { useState, useEffect } from 'react';
+import { Heart, Send, Trophy, LogOut, MessageCircle, Star, Bell, Image as ImageIcon, X, Eye, EyeOff } from 'lucide-react';
+import { auth, db } from './firebase';
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 signOut,
 onAuthStateChanged
-} from ‘firebase/auth’;
+} from 'firebase/auth';
 import {
 collection,
 doc,
@@ -24,17 +24,17 @@ arrayRemove,
 increment,
 writeBatch,
 getDocs
-} from ‘firebase/firestore’;
+} from 'firebase/firestore';
 
-const ADMIN_EMAIL = ‘danupona@scg.com’;
-const DEFAULT_REVEAL_TIME = ‘2026-06-12T08:00:00’;
+const ADMIN_EMAIL = 'danupona@scg.com';
+const DEFAULT_REVEAL_TIME = '2026-06-12T08:00:00';
 
 export default function BuddyApp() {
 const [currentUser, setCurrentUser] = useState(null);
 const [userProfile, setUserProfile] = useState(null);
 const [loading, setLoading] = useState(true);
-const [page, setPage] = useState(‘login’);
-const [formData, setFormData] = useState({ name: ‘’, email: ‘’, password: ‘’, avatar: null });
+const [page, setPage] = useState('login');
+const [formData, setFormData] = useState({ name: '', email: '', password: '', avatar: null });
 const [users, setUsers] = useState([]);
 const [buddyAssignments, setBuddyAssignments] = useState({});
 const [requests, setRequests] = useState([]);
@@ -48,15 +48,15 @@ useEffect(() => {
 const unsubscribe = onAuthStateChanged(auth, async (user) => {
 if (user) {
 setCurrentUser(user);
-const userDoc = await getDoc(doc(db, ‘users’, user.uid));
+const userDoc = await getDoc(doc(db, 'users', user.uid));
 if (userDoc.exists()) {
 setUserProfile({ id: user.uid, …userDoc.data() });
 }
-setPage(‘dashboard’);
+setPage('dashboard');
 } else {
 setCurrentUser(null);
 setUserProfile(null);
-setPage(‘login’);
+setPage('login');
 }
 setLoading(false);
 });
@@ -143,7 +143,7 @@ const reader = new FileReader();
 reader.onloadend = () => {
 const img = new Image();
 img.onload = () => {
-const canvas = document.createElement(‘canvas’);
+const canvas = document.createElement('canvas');
 let width = img.width;
 let height = img.height;
 if (width > height) {
@@ -153,10 +153,10 @@ if (height > maxSize) { width = (width * maxSize) / height; height = maxSize; }
 }
 canvas.width = width;
 canvas.height = height;
-const ctx = canvas.getContext(‘2d’);
+const ctx = canvas.getContext('2d');
 ctx.drawImage(img, 0, 0, width, height);
 // Return Base64 string with 0.7 quality
-resolve(canvas.toDataURL(‘image/jpeg’, 0.7));
+resolve(canvas.toDataURL('image/jpeg', 0.7));
 };
 img.src = reader.result;
 };
@@ -171,16 +171,16 @@ const reader = new FileReader();
 reader.onloadend = () => {
 const img = new Image();
 img.onload = () => {
-const canvas = document.createElement(‘canvas’);
+const canvas = document.createElement('canvas');
 const size = 150;
 canvas.width = size;
 canvas.height = size;
-const ctx = canvas.getContext(‘2d’);
+const ctx = canvas.getContext('2d');
 const minDim = Math.min(img.width, img.height);
 const sx = (img.width - minDim) / 2;
 const sy = (img.height - minDim) / 2;
 ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
-resolve(canvas.toDataURL(‘image/jpeg’, 0.7));
+resolve(canvas.toDataURL('image/jpeg', 0.7));
 };
 img.src = reader.result;
 };
@@ -194,8 +194,8 @@ if (!file) return null;
 try {
 return isAvatar ? await resizeAvatar(file) : await resizeImage(file);
 } catch (e) {
-console.error(‘Image processing error:’, e);
-alert(‘Failed to process image’);
+console.error('Image processing error:', e);
+alert('Failed to process image');
 return null;
 }
 };
@@ -209,17 +209,17 @@ if (formData.avatar) {
 avatarUrl = await uploadImage(formData.avatar, true);
 }
 const cred = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-await setDoc(doc(db, ‘users’, cred.user.uid), {
+await setDoc(doc(db, 'users', cred.user.uid), {
 name: formData.name,
 email: formData.email,
 avatar: avatarUrl,
 careScore: 0,
 createdAt: serverTimestamp(),
 });
-setFormData({ name: ‘’, email: ‘’, password: ‘’, avatar: null });
-alert(‘Register successful!’);
+setFormData({ name: '', email: '', password: '', avatar: null });
+alert('Register successful!');
 } catch (e) {
-alert(’Register failed: ’ + e.message);
+alert('Register failed: ' + e.message);
 }
 };
 
@@ -228,9 +228,9 @@ const handleLogin = async (e) => {
 e.preventDefault();
 try {
 await signInWithEmailAndPassword(auth, formData.email, formData.password);
-setFormData({ name: ‘’, email: ‘’, password: ‘’, avatar: null });
+setFormData({ name: '', email: '', password: '', avatar: null });
 } catch (e) {
-alert(’Login failed: ’ + e.message);
+alert('Login failed: ' + e.message);
 }
 };
 
@@ -260,7 +260,7 @@ return users.find(u => u.id === carerId);
 // Generate buddy chain - random matching only
 const handleGenerateBuddies = async () => {
 if (users.length < 2) {
-alert(‘Need at least 2 users!’);
+alert('Need at least 2 users!');
 return;
 }
 const shuffled = […users].sort(() => Math.random() - 0.5);
@@ -268,7 +268,7 @@ const newAssignments = {};
 for (let i = 0; i < shuffled.length; i++) {
 newAssignments[shuffled[i].id] = shuffled[(i + 1) % shuffled.length].id;
 }
-await setDoc(doc(db, ‘config’, ‘buddyAssignments’), { assignments: newAssignments });
+await setDoc(doc(db, 'config', 'buddyAssignments'), { assignments: newAssignments });
 alert(`Buddy chain generated for ${shuffled.length} users! 🎉`);
 };
 
@@ -276,7 +276,7 @@ alert(`Buddy chain generated for ${shuffled.length} users! 🎉`);
 const handleResetBuddies = async () => {
 try {
 // Clear assignments
-await setDoc(doc(db, ‘config’, ‘buddyAssignments’), { assignments: {} });
+await setDoc(doc(db, 'config', 'buddyAssignments'), { assignments: {} });
 
 ```
   // Reset all care scores
@@ -313,13 +313,13 @@ await setDoc(doc(db, ‘config’, ‘buddyAssignments’), { assignments: {} })
 
 // Update reveal time
 const handleUpdateRevealTime = async (newTime) => {
-await setDoc(doc(db, ‘config’, ‘revealTime’), { time: newTime });
+await setDoc(doc(db, 'config', 'revealTime'), { time: newTime });
 };
 
 // Post request
 const handlePostRequest = async (description) => {
 if (!userProfile) return;
-await addDoc(collection(db, ‘requests’), {
+await addDoc(collection(db, 'requests'), {
 userId: userProfile.id,
 userName: userProfile.name,
 description,
@@ -330,7 +330,7 @@ careItems: [],
 };
 
 const handleDeleteRequest = async (requestId) => {
-await deleteDoc(doc(db, ‘requests’, requestId));
+await deleteDoc(doc(db, 'requests', requestId));
 };
 
 // Send a care - +1 care score
@@ -338,7 +338,7 @@ const handleSendCare = async (message, imageFile) => {
 if (!userProfile) return;
 const myBuddy = getMyBuddy();
 if (!myBuddy) {
-alert(‘No buddy assigned!’);
+alert('No buddy assigned!');
 return;
 }
 
@@ -403,7 +403,7 @@ await addDoc(collection(db, 'notifications'), {
 
 const handleAddComment = async (careId, comment) => {
 if (!userProfile) return;
-await updateDoc(doc(db, ‘cares’, careId), {
+await updateDoc(doc(db, 'cares', careId), {
 comments: arrayUnion({
 userId: userProfile.id,
 userName: userProfile.name,
@@ -415,7 +415,7 @@ createdAt: new Date().toISOString(),
 
 const handleLikeCare = async (careId, currentLikes) => {
 if (!userProfile) return;
-const careRef = doc(db, ‘cares’, careId);
+const careRef = doc(db, 'cares', careId);
 if (currentLikes.includes(userProfile.id)) {
 await updateDoc(careRef, { likes: arrayRemove(userProfile.id) });
 } else {
@@ -424,13 +424,13 @@ await updateDoc(careRef, { likes: arrayUnion(userProfile.id) });
 };
 
 const markNotificationAsRead = async (notifId) => {
-await updateDoc(doc(db, ‘notifications’, notifId), { read: true });
+await updateDoc(doc(db, 'notifications', notifId), { read: true });
 };
 
 const markAllAsRead = async () => {
 const unread = notifications.filter(n => !n.read);
 for (const n of unread) {
-await updateDoc(doc(db, ‘notifications’, n.id), { read: true });
+await updateDoc(doc(db, 'notifications', n.id), { read: true });
 }
 };
 
@@ -457,7 +457,7 @@ return (
 return (
 <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 font-['Segoe_UI']">
 {/* LOGIN PAGE */}
-{!currentUser && page === ‘login’ && (
+{!currentUser && page === 'login' && (
 <div className="flex items-center justify-center min-h-screen p-4">
 <div className="w-full max-w-md">
 <div className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200">
@@ -1005,12 +1005,12 @@ return (
 
 // Components
 function PostRequestForm({ onSubmit }) {
-const [input, setInput] = useState(’’);
+const [input, setInput] = useState('');
 const handleSubmit = async (e) => {
 e.preventDefault();
 if (input.trim()) {
 await onSubmit(input);
-setInput(’’);
+setInput('');
 }
 };
 return (
@@ -1022,7 +1022,7 @@ return (
 }
 
 function SendCareForm({ buddyName, onSubmit }) {
-const [message, setMessage] = useState(’’);
+const [message, setMessage] = useState('');
 const [imageFile, setImageFile] = useState(null);
 const [preview, setPreview] = useState(null);
 const [sending, setSending] = useState(false);
@@ -1042,7 +1042,7 @@ e.preventDefault();
 if (message.trim() && !sending) {
 setSending(true);
 await onSubmit(message, imageFile);
-setMessage(’’);
+setMessage('');
 setImageFile(null);
 setPreview(null);
 setSending(false);
@@ -1068,7 +1068,7 @@ return (
 </div>
 )}
 <button type="submit" disabled={sending} className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-3 rounded-xl disabled:opacity-50 flex items-center justify-center gap-2">
-<Send size={20} /> {sending ? ‘Sending…’ : ‘Send Care 🤫’}
+<Send size={20} /> {sending ? 'Sending…' : 'Send Care 🤫'}
 </button>
 </form>
 );
@@ -1083,7 +1083,7 @@ return (
 <p className="font-bold text-pink-700">{buddy?.name} wants:</p>
 <p className="text-lg text-gray-800 mt-1">{request.description}</p>
 </div>
-<span className="text-3xl">{alreadyFulfilled ? ‘✅’ : ‘💭’}</span>
+<span className="text-3xl">{alreadyFulfilled ? '✅' : '💭'}</span>
 </div>
 {alreadyFulfilled ? (
 <button disabled className="bg-gray-200 text-gray-500 font-bold px-6 py-3 rounded-xl cursor-not-allowed">✅ Got It!</button>
@@ -1096,7 +1096,7 @@ return (
 
 function CareCard({ care, users, userProfile, isBuddyRevealed, onComment, onLike }) {
 const [showComment, setShowComment] = useState(false);
-const [comment, setComment] = useState(’’);
+const [comment, setComment] = useState('');
 const sender = users.find(u => u.id === care.fromUserId);
 const recipient = users.find(u => u.id === care.toUserId);
 const isLiked = (care.likes || []).includes(userProfile.id);
@@ -1106,7 +1106,7 @@ const handleSubmit = async (e) => {
 e.preventDefault();
 if (comment.trim()) {
 await onComment(comment);
-setComment(’’);
+setComment('');
 setShowComment(false);
 }
 };
@@ -1115,7 +1115,7 @@ return (
 <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-200">
 <p className="text-sm text-gray-600 mb-4">
 {isBuddyRevealed || isMyCare ? (
-<><span className="font-bold text-purple-700">{isMyCare ? ‘You’ : sender?.name}</span> sent care to <span className="font-bold text-pink-700">{recipient?.name}</span></>
+<><span className="font-bold text-purple-700">{isMyCare ? 'You' : sender?.name}</span> sent care to <span className="font-bold text-pink-700">{recipient?.name}</span></>
 ) : (
 <><span className="font-bold text-purple-700">🤫 Secret Buddy</span> sent care to <span className="font-bold text-pink-700">{recipient?.name}</span></>
 )}
@@ -1135,7 +1135,7 @@ return (
 )}
 <div className="flex gap-2 items-center flex-wrap">
 <button onClick={onLike} className={`flex items-center gap-1 px-3 py-2 rounded-lg font-bold ${isLiked ? 'bg-red-200 text-red-700' : 'bg-gray-200 text-gray-700'}`}>
-<Heart size={16} className={isLiked ? ‘fill-current’ : ‘’} />
+<Heart size={16} className={isLiked ? 'fill-current' : ''} />
 {(care.likes || []).length}
 </button>
 {!showComment ? (
@@ -1144,7 +1144,7 @@ return (
 <form onSubmit={handleSubmit} className="flex gap-2 w-full mt-2">
 <input type=“text” value={comment} onChange={(e) => setComment(e.target.value)} placeholder=“Add a comment…” className=“flex-1 min-w-0 px-3 py-2 border-2 border-purple-300 rounded-lg text-sm” />
 <button type="submit" className="px-3 py-2 bg-blue-500 text-white rounded-lg font-bold shrink-0">Send</button>
-<button type=“button” onClick={() => { setShowComment(false); setComment(’’); }} className=“px-3 py-2 bg-gray-300 text-gray-700 rounded-lg font-bold shrink-0”>X</button>
+<button type=“button” onClick={() => { setShowComment(false); setComment(''); }} className=“px-3 py-2 bg-gray-300 text-gray-700 rounded-lg font-bold shrink-0”>X</button>
 </form>
 )}
 </div>
