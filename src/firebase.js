@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// ⚠️ แทนที่ด้วย Config จาก Firebase Console ของคุณ
+// ⚠️ แทนที่ด้วย Config จาก Firebase Console
 const firebaseConfig = {
   apiKey: "AIzaSyBFWsztdGP_qlHv4ZIs0MTaSxQ_xPGbQUA",
   authDomain: "buddy-system-3500f.firebaseapp.com",
