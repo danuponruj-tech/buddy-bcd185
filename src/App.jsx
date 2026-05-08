@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from ‘react’;
 import { Heart, Send, Trophy, LogOut, MessageCircle, Star, Bell, Image as ImageIcon, X, Eye, EyeOff } from ‘lucide-react’;
-import { auth, db } from ‘./firebase’;
+import { auth, db } from './firebase’;
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
