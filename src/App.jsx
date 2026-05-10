@@ -86,8 +86,11 @@ export default function BuddyApp() {
 <p style="margin:0 0 8px;font-size:20px;font-weight:bold;color:#1f2937;">Welcome, ${name}! 🎉</p>
 <p style="margin:0 0 12px;font-size:15px;color:#6b7280;line-height:1.6;">You have successfully joined <strong>Buddy BCD 185</strong>.</p>
 <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">Stay tuned — the admin will assign your buddy soon! 🤫</p>
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding-bottom:12px;">
 <a href="${APP_URL}" style="display:inline-block;background-color:#9333ea;color:#ffffff;font-weight:bold;font-size:16px;text-decoration:none;padding:14px 32px;border-radius:10px;">🎯 Open Buddy BCD 185</a>
+</td></tr>
+<tr><td align="center">
+<p style="margin:0;font-size:13px;color:#6b7280;">Or copy this link: <a href="${APP_URL}" style="color:#9333ea;">${APP_URL}</a></p>
 </td></tr></table>
 <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;text-align:center;">You're receiving this because you registered at Buddy BCD 185.</p>
 </td></tr>
@@ -109,8 +112,11 @@ export default function BuddyApp() {
 <p style="margin:0 0 8px;font-size:20px;font-weight:bold;color:#1f2937;">Hey ${name}! 🎯</p>
 <p style="margin:0 0 12px;font-size:15px;color:#6b7280;line-height:1.6;">The admin has assigned buddies for everyone!</p>
 <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">Come check who you're taking care of — and start sending some love! 💝</p>
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding-bottom:12px;">
 <a href="${APP_URL}" style="display:inline-block;background-color:#9333ea;color:#ffffff;font-weight:bold;font-size:16px;text-decoration:none;padding:14px 32px;border-radius:10px;">💝 See My Buddy</a>
+</td></tr>
+<tr><td align="center">
+<p style="margin:0;font-size:13px;color:#6b7280;">Or copy this link: <a href="${APP_URL}" style="color:#9333ea;">${APP_URL}</a></p>
 </td></tr></table>
 <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;text-align:center;">You're receiving this because you're part of Buddy BCD 185.</p>
 </td></tr>
@@ -132,8 +138,11 @@ export default function BuddyApp() {
 <p style="margin:0 0 8px;font-size:20px;font-weight:bold;color:#1f2937;">Hey ${name}! 💌</p>
 <p style="margin:0 0 12px;font-size:15px;color:#6b7280;line-height:1.6;">Your secret buddy just sent you a Care! 🤫</p>
 <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">Come see what they sent you!</p>
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding-bottom:12px;">
 <a href="${APP_URL}" style="display:inline-block;background-color:#9333ea;color:#ffffff;font-weight:bold;font-size:16px;text-decoration:none;padding:14px 32px;border-radius:10px;">💌 View My Care</a>
+</td></tr>
+<tr><td align="center">
+<p style="margin:0;font-size:13px;color:#6b7280;">Or copy this link: <a href="${APP_URL}" style="color:#9333ea;">${APP_URL}</a></p>
 </td></tr></table>
 <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;text-align:center;">You're receiving this because you're part of Buddy BCD 185.</p>
 </td></tr>
@@ -155,8 +164,11 @@ export default function BuddyApp() {
 <p style="margin:0 0 8px;font-size:20px;font-weight:bold;color:#1f2937;">Hey ${name}! 📝</p>
 <p style="margin:0 0 12px;font-size:15px;color:#6b7280;line-height:1.6;">Your buddy <strong style="color:#1f2937;">${buddyName}</strong> just posted a care request!</p>
 <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">Go check what they need and show them some love 💝</p>
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding-bottom:12px;">
 <a href="${APP_URL}" style="display:inline-block;background-color:#9333ea;color:#ffffff;font-weight:bold;font-size:16px;text-decoration:none;padding:14px 32px;border-radius:10px;">💝 See Request</a>
+</td></tr>
+<tr><td align="center">
+<p style="margin:0;font-size:13px;color:#6b7280;">Or copy this link: <a href="${APP_URL}" style="color:#9333ea;">${APP_URL}</a></p>
 </td></tr></table>
 <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;text-align:center;">You're receiving this because you're part of Buddy BCD 185.</p>
 </td></tr>
@@ -178,8 +190,11 @@ export default function BuddyApp() {
 <p style="margin:0 0 8px;font-size:20px;font-weight:bold;color:#1f2937;">Hey ${name}! 🎊</p>
 <p style="margin:0 0 12px;font-size:15px;color:#6b7280;line-height:1.6;">The moment you've been waiting for is here!</p>
 <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">Come find out who your Secret Buddy was all along! 🤫✨</p>
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding-bottom:12px;">
 <a href="${APP_URL}" style="display:inline-block;background-color:#9333ea;color:#ffffff;font-weight:bold;font-size:16px;text-decoration:none;padding:14px 32px;border-radius:10px;">🎊 Reveal My Buddy!</a>
+</td></tr>
+<tr><td align="center">
+<p style="margin:0;font-size:13px;color:#6b7280;">Or copy this link: <a href="${APP_URL}" style="color:#9333ea;">${APP_URL}</a></p>
 </td></tr></table>
 <p style="margin:24px 0 0;font-size:12px;color:#9ca3af;text-align:center;">You're receiving this because you're part of Buddy BCD 185.</p>
 </td></tr>
