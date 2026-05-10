@@ -46,7 +46,7 @@ export default function BuddyApp() {
   const [showSettings, setShowSettings] = useState(false);
   const [editProfileData, setEditProfileData] = useState({ name: '', avatar: null, avatarPreview: null });
   const [selectedMember, setSelectedMember] = useState(null);
-  const RESEND_API_KEY = 're_REPLACE_WITH_YOUR_API_KEY';
+  const RESEND_API_KEY = 're_bmCxCY13_EPhfG8fwDeiBFyrDsQLNgkoC';
   const APP_URL = 'https://buddy-bcd185.vercel.app';
 
   // Send Email via Resend
